@@ -21,7 +21,7 @@ export function About() {
   ];
 
   return (
-    <section className="relative py-32 bg-black overflow-hidden">
+    <section className="relative py-32 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-fuchsia-950/20 to-transparent" />
       
@@ -77,9 +77,9 @@ export function About() {
           >
             <div className="absolute inset-0 bg-cyan-500/10 blur-3xl" />
             <img
-              src="https://images.unsplash.com/photo-1641650265007-b2db704cd9f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnB1bmslMjBjaXR5JTIwbmVvbiUyMGxpZ2h0c3xlbnwxfHx8fDE3NzMzMjMwMjd8MA&ixlib=rb-4.1.0&q=80&w=1080"
-              alt="Cyberpunk aesthetic"
-              className="relative rounded-lg border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.3)]"
+              src="/profile_pic.jpg"
+              alt="Rakesh Lakshmanan"
+              className="relative rounded-lg border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.3)] w-full object-cover object-top"
             />
           </motion.div>
         </div>
