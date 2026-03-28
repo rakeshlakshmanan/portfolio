@@ -37,7 +37,7 @@ export function Skills() {
     },
     {
       category: "Databases",
-      context: "Built SQLite-backed queuing systems and integrated HDFS for 15+ applications",
+      context: "Mainly worked on PostgreSQL query optimisation within the Mickey internal framework",
       color: "cyan",
       skills: [
         { name: "PostgreSQL" },
