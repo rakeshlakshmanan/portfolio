@@ -4,6 +4,7 @@ export function Skills() {
   const skillCategories = [
     {
       category: "Languages & Backend",
+      context: "Primary language Java — used across 3 years in production systems",
       color: "cyan",
       skills: [
         { name: "Java" },
@@ -14,6 +15,7 @@ export function Skills() {
     },
     {
       category: "Distributed Systems",
+      context: "Designed 4-node HA/DR topology achieving 99.95% uptime across 100+ nodes",
       color: "fuchsia",
       skills: [
         { name: "High Availability" },
@@ -24,6 +26,7 @@ export function Skills() {
     },
     {
       category: "Cloud & DevOps",
+      context: "Deployed and managed containerised workloads on AWS and GCP in production",
       color: "green",
       skills: [
         { name: "Kubernetes" },
@@ -34,6 +37,7 @@ export function Skills() {
     },
     {
       category: "Databases",
+      context: "Built SQLite-backed queuing systems and integrated HDFS for 15+ applications",
       color: "cyan",
       skills: [
         { name: "PostgreSQL" },
@@ -106,12 +110,14 @@ export function Skills() {
               >
                 <div className={`absolute -inset-0.5 ${colorClasses.bg} opacity-0 group-hover:opacity-20 rounded-lg blur transition duration-300`} />
                 <div className="relative bg-gray-900 border border-gray-800 rounded-lg p-6">
-                  <div className="flex items-center gap-3 mb-6">
+                  <div className="flex items-center gap-3 mb-3">
                     <div className={`w-2 h-2 ${colorClasses.bg} rounded-full ${colorClasses.glow}`} />
                     <h3 className={`text-xl ${colorClasses.text}`}>
                       {category.category}
                     </h3>
                   </div>
+
+                  <p className="text-gray-500 text-xs leading-relaxed mb-5">{category.context}</p>
 
                   <div className="flex flex-wrap gap-2">
                     {category.skills.map((skill) => (
