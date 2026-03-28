@@ -17,7 +17,7 @@ const stats: Stat[] = [
   { value: 60, suffix: "%", label: "Reduction in Manual Testing", color: "text-green-400" },
   { value: 35, suffix: "%", label: "Faster Recovery Time", color: "text-yellow-400" },
   { value: 100, suffix: "+", label: "Nodes in Production", color: "text-cyan-400" },
-  { value: 2, suffix: "+ yrs", label: "Production Experience", color: "text-fuchsia-400" },
+  { value: 3, suffix: "+ yrs", label: "Production Experience", color: "text-fuchsia-400" },
 ];
 
 function Counter({ stat, inView }: { stat: Stat; inView: boolean }) {
