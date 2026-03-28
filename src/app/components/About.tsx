@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Server, Shield, Cloud } from "lucide-react";
+import { Terminal } from "./Terminal";
 
 export function About() {
   const features = [
@@ -47,25 +48,9 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="h-full min-h-[420px]"
           >
-            <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-lg blur opacity-25" />
-              <div className="relative bg-gray-900 border border-gray-800 rounded-lg p-8">
-                <div className="flex items-center gap-2 mb-4 text-green-400">
-                  <span className="text-sm font-mono">{'>'}_</span>
-                  <span className="w-2 h-4 bg-green-400 animate-pulse" />
-                </div>
-                <p className="text-gray-300 leading-relaxed mb-4 font-mono text-sm">
-                  $ whoami
-                </p>
-                <p className="text-gray-300 leading-relaxed mb-4">
-                  Backend engineer with 2+ years of experience designing and building high-availability and distributed systems in production environments. Previously at Zoho Corporation, working on reliability-critical systems that improved uptime, recovery time, and operational efficiency.
-                </p>
-                <p className="text-gray-400 leading-relaxed">
-                  Currently pursuing a Master's in Computer Science (Future Networked Systems) at Trinity College Dublin, with strong interests in distributed systems, platform engineering, and cloud-native architectures.
-                </p>
-              </div>
-            </div>
+            <Terminal />
           </motion.div>
 
           <motion.div
