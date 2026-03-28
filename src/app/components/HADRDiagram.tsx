@@ -21,7 +21,39 @@ export function HADRDiagram() {
         </div>
       </div>
 
-      <svg viewBox="0 0 900 380" className="w-full" xmlns="http://www.w3.org/2000/svg">
+      {/* Mobile fallback — stacked node cards */}
+      <div className="md:hidden space-y-3 mb-4">
+        <div className="text-xs font-mono text-cyan-400 tracking-widest mb-2">DC-1 · PRODUCTION</div>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="bg-gray-950 border border-cyan-500 rounded-lg p-3">
+            <div className="flex items-center gap-2 mb-1"><span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" /><span className="text-cyan-400 text-xs font-mono">ACTIVE</span></div>
+            <p className="text-white text-sm font-mono font-bold">NODE 1</p>
+            <p className="text-gray-400 text-xs font-mono">PRIMARY</p>
+          </div>
+          <div className="bg-gray-950 border border-gray-700 rounded-lg p-3">
+            <div className="flex items-center gap-2 mb-1"><span className="w-2 h-2 rounded-full bg-gray-600" /><span className="text-gray-500 text-xs font-mono">STANDBY</span></div>
+            <p className="text-white text-sm font-mono font-bold">NODE 2</p>
+            <p className="text-gray-400 text-xs font-mono">SECONDARY</p>
+          </div>
+        </div>
+        <div className="text-center text-fuchsia-400 text-xs font-mono">↕ ASYNC REPLICATION</div>
+        <div className="text-xs font-mono text-fuchsia-400 tracking-widest mb-2">DC-2 · DISASTER RECOVERY</div>
+        <div className="grid grid-cols-2 gap-2">
+          <div className="bg-gray-950 border border-purple-700 border-dashed rounded-lg p-3">
+            <div className="flex items-center gap-2 mb-1"><span className="w-2 h-2 rounded-full bg-gray-600" /><span className="text-gray-500 text-xs font-mono">STANDBY</span></div>
+            <p className="text-white text-sm font-mono font-bold">NODE 3</p>
+            <p className="text-gray-400 text-xs font-mono">DR PRIMARY</p>
+          </div>
+          <div className="bg-gray-950 border border-gray-700 rounded-lg p-3">
+            <div className="flex items-center gap-2 mb-1"><span className="w-2 h-2 rounded-full bg-gray-600" /><span className="text-gray-500 text-xs font-mono">STANDBY</span></div>
+            <p className="text-white text-sm font-mono font-bold">NODE 4</p>
+            <p className="text-gray-400 text-xs font-mono">DR SECONDARY</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop SVG diagram */}
+      <svg viewBox="0 0 900 380" className="w-full hidden md:block" xmlns="http://www.w3.org/2000/svg">
 
         {/* DC1 background */}
         <rect x="25" y="30" width="340" height="305" rx="10"
@@ -121,7 +153,7 @@ export function HADRDiagram() {
       </svg>
 
       {/* Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-6 mt-1 text-xs font-mono text-gray-500">
+      <div className="hidden md:flex flex-wrap items-center justify-center gap-6 mt-1 text-xs font-mono text-gray-500">
         <div className="flex items-center gap-2">
           <svg width="24" height="8"><line x1="0" y1="4" x2="24" y2="4" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="4 3" /></svg>
           <span>SYNC REPLICATION</span>
