@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Github, Linkedin, Mail, Terminal } from "lucide-react";
+import { Github, Linkedin, Mail, Terminal, Download } from "lucide-react";
 
 export function Hero() {
   return (
@@ -64,6 +64,15 @@ export function Hero() {
             </span>
           </a>
           
+          <a
+            href="/RakeshLakshmananCV.pdf"
+            download
+            className="px-8 py-4 border border-gray-700 rounded-lg bg-gray-900/50 hover:border-fuchsia-500 hover:shadow-[0_0_20px_rgba(217,70,239,0.3)] transition-all flex items-center gap-2 text-gray-300 hover:text-fuchsia-400 font-semibold"
+          >
+            <Download className="w-5 h-5" />
+            DOWNLOAD CV
+          </a>
+
           <div className="flex gap-3">
             <a
               href="https://github.com/rakeshlakshmanan"
