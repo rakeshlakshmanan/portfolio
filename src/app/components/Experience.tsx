@@ -9,7 +9,7 @@ export function Experience() {
       company: "Zoho Corporation",
       location: "Chennai, India",
       period: "06/2023 – 08/2025",
-      image: "/zoho.jpeg",
+      image: `${import.meta.env.BASE_URL}zoho.jpeg`,
       highlights: [
         "Architected and engineered Mickey, an internal Java-based platform framework used by multiple product teams, reducing development time and improving long-term maintainability.",
         "Enhanced failover and recovery mechanisms with automated upgrade workflows, reducing manual intervention during failovers by 60% and recovery time by 35%.",
@@ -23,7 +23,7 @@ export function Experience() {
       company: "Zoho Corporation",
       location: "Chennai, India",
       period: "01/2023 – 05/2023",
-      image: "/zoho.jpeg",
+      image: `${import.meta.env.BASE_URL}zoho.jpeg`,
       highlights: [
         "Architected a test automation framework for Java Swing applications, reducing manual testing effort by 60% and expanding regression coverage by 40%.",
         "Led development of a Java NIO filesystem provider, simplifying HDFS integration for 15+ applications and enhancing team efficiency by 20%.",
@@ -34,7 +34,7 @@ export function Experience() {
       company: "Zoho Corporation",
       location: "Chennai, India",
       period: "04/2022 – 09/2022",
-      image: "/zoho.jpeg",
+      image: `${import.meta.env.BASE_URL}zoho.jpeg`,
       highlights: [
         "Built and optimized a SQLite-backed queue mechanism in Java to manage tasks and messages in FIFO order.",
         "Investigated and resolved 500+ production and support tickets over 6 months, improving system stability and reducing recurring defects.",
@@ -48,14 +48,14 @@ export function Experience() {
       institution: "Trinity College Dublin",
       period: "09/2025 – Present",
       detail: "Grade 1:1 Expected",
-      image: "/trinity.jpg",
+      image: `${import.meta.env.BASE_URL}trinity.jpg`,
     },
     {
       degree: "Bachelor's in Computer Science",
       institution: "St. Joseph's College of Engineering, India",
       period: "06/2019 – 04/2023",
       detail: "Final grade 1:1 (92.3%)",
-      image: "/st.josephs.jpeg",
+      image: `${import.meta.env.BASE_URL}st.josephs.jpeg`,
     },
   ];
 

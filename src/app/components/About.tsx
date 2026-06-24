@@ -62,7 +62,7 @@ export function About() {
           >
             <div className="absolute inset-0 bg-cyan-500/10 blur-3xl" />
             <img
-              src="/profile_pic.jpg"
+              src={`${import.meta.env.BASE_URL}profile_pic.jpg`}
               alt="Rakesh Lakshmanan"
               className="relative rounded-lg border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.3)] w-full h-full object-cover object-top"
             />
