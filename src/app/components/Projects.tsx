@@ -4,6 +4,46 @@ import { Github } from "lucide-react";
 export function Projects() {
   const projects = [
     {
+      title: "SmartEnoughCity",
+      description:
+        "Cloud-native urban transport intelligence platform for the Greater Dublin Area. A 4-service microservices system ingests real-time data from 15+ transport APIs (GTFS, GTFS-RT, GBFS, Irish Rail & Luas XML) into PostgreSQL/PostGIS and serves ML-driven mobility indicators, disruption alerts, and city-planning tools through an interactive React dashboard. Deployed to GKE via Helm, provisioned with Terraform, and backed by a ~600-test suite with a 75% coverage gate.",
+      image:
+        "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1080&q=80",
+      tech: ["Java 17", "Spring Boot", "Python", "FastAPI", "scikit-learn", "React", "TypeScript", "PostgreSQL/PostGIS", "Docker", "Kubernetes (GKE)", "Helm", "Terraform", "Istio", "Prometheus", "Grafana"],
+      github: "https://github.com/rakeshlakshmanan/SmartEnoughCity",
+      accent: "blue",
+    },
+    {
+      title: "Distributed Traffic Booking System",
+      description:
+        "A globally-distributed road-booking platform enforcing per-segment road capacity across three geographic regions (Ireland, UK, France). A 6-service architecture with a Saga orchestrator coordinating cross-region bookings and compensating transactions, Redis distributed locks to prevent double-booking under load, a Dijkstra shortest-path routing engine, and a self-healing saga reconciler — deployed on a multi-VM AWS topology with event-driven RabbitMQ consumers.",
+      image:
+        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1080&q=80",
+      tech: ["Python", "FastAPI", "SQLAlchemy (async)", "PostgreSQL", "Redis", "RabbitMQ", "React", "TypeScript", "Docker", "AWS EC2/RDS"],
+      github: "https://github.com/rakeshlakshmanan/distributed-road-booking",
+      accent: "violet",
+    },
+    {
+      title: "DevVault",
+      description:
+        "A full-stack, AI-powered developer bookmark manager. On every save it scrapes the page via Jina AI Reader and asynchronously calls Google Gemini 2.5 Flash to generate summaries and tags through an event-driven pipeline that keeps AI latency off the request path. Features stateless JWT + Google OAuth2 auth, a friend/share social layer, and a public Explore feed — deployed end-to-end on GKE with multi-stage Docker builds and GitHub Actions CI/CD.",
+      image:
+        "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1080&q=80",
+      tech: ["Java 17", "Spring Boot", "Spring Security", "PostgreSQL", "Google Gemini 2.5 Flash", "React", "TypeScript", "TanStack Query", "Docker", "Kubernetes (GKE)"],
+      github: "https://github.com/rakeshlakshmanan/DevVault",
+      accent: "emerald",
+    },
+    {
+      title: "EliteCode",
+      description:
+        "An adaptive coding-interview prep platform built around a Bayesian Knowledge Tracing (BKT) engine that continuously models each user's mastery per topic and recommends problems in their Zone of Proximal Development. Self-hosted Judge0 CE in Docker enables sandboxed execution across 6 languages at zero per-run cost, with JWKS-based JWT verification against Supabase Auth, Row-Level Security, and full GitHub Actions CI/CD.",
+      image:
+        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1080&q=80",
+      tech: ["Python", "FastAPI", "Supabase", "Judge0 CE", "React", "TypeScript", "Monaco Editor", "scikit-learn (BKT)", "GitHub Actions", "GCP"],
+      github: "https://github.com/rakeshlakshmanan/AdaptiveEliteCode",
+      accent: "amber",
+    },
+    {
       title: "Anti-AI CAPTCHA System",
       description:
         "A video-based CAPTCHA system using behavioral analysis to detect and block automated bot attacks. Simulated and analyzed AI-driven and stealth attack strategies to rigorously evaluate CAPTCHA resilience in real-world adversarial scenarios.",
@@ -37,23 +77,54 @@ export function Projects() {
 
   const getAccentClasses = (accent: string) => {
     const colors = {
+      blue: {
+        border: "border-blue-500",
+        text: "text-blue-400",
+        hover: "hover:border-blue-500",
+        shadow: "hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]",
+        glow: "bg-gradient-to-r from-blue-500 to-transparent",
+      },
+      violet: {
+        border: "border-violet-500",
+        text: "text-violet-400",
+        hover: "hover:border-violet-500",
+        shadow: "hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]",
+        glow: "bg-gradient-to-r from-violet-500 to-transparent",
+      },
+      emerald: {
+        border: "border-emerald-500",
+        text: "text-emerald-400",
+        hover: "hover:border-emerald-500",
+        shadow: "hover:shadow-[0_0_30px_rgba(16,185,129,0.3)]",
+        glow: "bg-gradient-to-r from-emerald-500 to-transparent",
+      },
+      amber: {
+        border: "border-amber-500",
+        text: "text-amber-400",
+        hover: "hover:border-amber-500",
+        shadow: "hover:shadow-[0_0_30px_rgba(245,158,11,0.3)]",
+        glow: "bg-gradient-to-r from-amber-500 to-transparent",
+      },
       cyan: {
         border: "border-cyan-500",
         text: "text-cyan-400",
         hover: "hover:border-cyan-500",
         shadow: "hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]",
+        glow: "bg-gradient-to-r from-cyan-500 to-transparent",
       },
       fuchsia: {
         border: "border-fuchsia-500",
         text: "text-fuchsia-400",
         hover: "hover:border-fuchsia-500",
         shadow: "hover:shadow-[0_0_30px_rgba(217,70,239,0.3)]",
+        glow: "bg-gradient-to-r from-fuchsia-500 to-transparent",
       },
       green: {
         border: "border-green-500",
         text: "text-green-400",
         hover: "hover:border-green-500",
         shadow: "hover:shadow-[0_0_30px_rgba(34,197,94,0.3)]",
+        glow: "bg-gradient-to-r from-green-500 to-transparent",
       },
     };
     return colors[accent as keyof typeof colors];
@@ -95,7 +166,7 @@ export function Projects() {
                 viewport={{ once: true }}
                 className="group relative"
               >
-                <div className={`absolute -inset-0.5 bg-gradient-to-r from-${project.accent}-500 to-transparent opacity-0 group-hover:opacity-30 rounded-lg blur transition duration-300`} />
+                <div className={`absolute -inset-0.5 ${accentClasses.glow} opacity-0 group-hover:opacity-30 rounded-lg blur transition duration-300`} />
                 <div className={`relative bg-gray-900 border border-gray-800 rounded-lg overflow-hidden ${accentClasses.hover} ${accentClasses.shadow} transition-all duration-300`}>
                   <div className="grid md:grid-cols-2 gap-0">
                     <div className="relative h-64 md:h-full overflow-hidden">
