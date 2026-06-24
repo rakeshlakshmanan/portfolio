@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
 import { Experience } from "./components/Experience";
@@ -9,6 +10,14 @@ import { ParticleBackground } from "./components/ParticleBackground";
 import { Stats } from "./components/Stats";
 
 export default function App() {
+  useEffect(() => {
+    // Always open the portfolio at the top, ignoring any restored scroll position.
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="size-full bg-black text-white">
       <ParticleBackground />
