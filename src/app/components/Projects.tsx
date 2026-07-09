@@ -1,8 +1,18 @@
 import { motion } from "motion/react";
-import { Github } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
+
+type Project = {
+  title: string;
+  description: string;
+  image: string;
+  tech: string[];
+  github: string;
+  live?: string;
+  accent: string;
+};
 
 export function Projects() {
-  const projects = [
+  const projects: Project[] = [
     {
       title: "SmartEnoughCity",
       description:
@@ -31,6 +41,7 @@ export function Projects() {
         "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1080&q=80",
       tech: ["Java 17", "Spring Boot", "Spring Security", "PostgreSQL", "Google Gemini 2.5 Flash", "React", "TypeScript", "TanStack Query", "Docker", "Kubernetes (GKE)"],
       github: "https://github.com/rakeshlakshmanan/DevVault",
+      live: "https://devvault.qd.je",
       accent: "emerald",
     },
     {
@@ -42,36 +53,6 @@ export function Projects() {
       tech: ["Python", "FastAPI", "Supabase", "Judge0 CE", "React", "TypeScript", "Monaco Editor", "scikit-learn (BKT)", "GitHub Actions", "GCP"],
       github: "https://github.com/rakeshlakshmanan/AdaptiveEliteCode",
       accent: "amber",
-    },
-    {
-      title: "Anti-AI CAPTCHA System",
-      description:
-        "A video-based CAPTCHA system using behavioral analysis to detect and block automated bot attacks. Simulated and analyzed AI-driven and stealth attack strategies to rigorously evaluate CAPTCHA resilience in real-world adversarial scenarios.",
-      image:
-        "https://images.unsplash.com/photo-1660165458059-57cfb6cc87e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmdXR1cmlzdGljJTIwdGVjaG5vbG9neSUyMGFic3RyYWN0fGVufDF8fHx8MTc3MzMzMTU0Mnww&ixlib=rb-4.1.0&q=80&w=1080",
-      tech: ["Python", "Flask", "OpenCV", "Selenium", "OCR", "Google Gemini AI", "JavaScript"],
-      github: "https://github.com/rakeshlakshmanan",
-      accent: "cyan",
-    },
-    {
-      title: "Real-time Chat Application",
-      description:
-        "A real-time messaging application supporting authentication, individual and group chats, and live message delivery. Integrated AI-based chat summarization to provide concise conversation overviews.",
-      image:
-        "https://images.unsplash.com/photo-1675495277087-10598bf7bcd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwY29kZSUyMG1hdHJpeHxlbnwxfHx8fDE3NzMzNTYwODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      tech: ["Java Servlets", "JSP", "Node.js", "Socket.IO", "MongoDB", "MySQL"],
-      github: "https://github.com/rakeshlakshmanan",
-      accent: "fuchsia",
-    },
-    {
-      title: "Fall Detection Mobile App",
-      description:
-        "A cross-platform mobile application for real-time fall detection using sensor fusion and motion analysis. Implemented cloud-based emergency alerts, location tracking, and alarm triggering for rapid incident response.",
-      image:
-        "https://images.unsplash.com/photo-1641650265007-b2db704cd9f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnB1bmslMjBjaXR5JTIwbmVvbiUyMGxpZ2h0c3xlbnwxfHx8fDE3NzMzMjMwMjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      tech: ["Flutter", "Dart", "Firebase Realtime DB", "GPS", "SQLite"],
-      github: "https://github.com/rakeshlakshmanan",
-      accent: "green",
     },
   ];
 
@@ -217,6 +198,17 @@ export function Projects() {
                           <Github className="w-4 h-4" />
                           View on GitHub
                         </a>
+                        {project.live && (
+                          <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex items-center gap-2 px-6 py-3 border ${accentClasses.border} ${accentClasses.text} rounded-lg hover:bg-white/5 transition-all`}
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Live Demo
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
