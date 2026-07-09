@@ -15,6 +15,9 @@ export function Experience() {
         "Designed a four-node High-Availability and Disaster Recovery topology using configuration-driven scheduling and Robocopy-based replication, achieving 99.95% uptime.",
         "Built and owned FileSync, a standalone Java NIO–based file replication utility, reducing file transfer error rates from 22% to 7%.",
         "Contributed to distributed system architecture supporting deployments across 100+ nodes through scalability planning and performance optimization.",
+        "Integrated ClickHouse as an analytics-optimized database backend into the Mickey framework, letting analytics-heavy teams leverage fast columnar reads as an alternative to the default PostgreSQL/MSSQL storage layer.",
+        "Scaled the Mickey framework to 20+ internal teams, contributing to a ~10% increase in customer growth across adopting teams through improved platform reliability and reduced onboarding friction.",
+        "Mentored two summer interns on high availability and distributed systems architecture, guiding them through HA topology design, fault-tolerance patterns, and production deployment practices.",
       ],
     },
     {
