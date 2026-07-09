@@ -60,9 +60,6 @@ export function Contact() {
               Let's Connect
             </span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind? Let's build something amazing together
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
