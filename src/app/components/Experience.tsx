@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { Briefcase, GraduationCap, Award } from "lucide-react";
-import { HADRDiagram } from "./HADRDiagram";
 
 export function Experience() {
   const jobs = [
@@ -132,9 +131,6 @@ export function Experience() {
             ))}
           </div>
         </div>
-
-        {/* HA/DR Architecture Diagram */}
-        <HADRDiagram />
 
         {/* Education & Achievements */}
         <div className="grid md:grid-cols-2 gap-12">
