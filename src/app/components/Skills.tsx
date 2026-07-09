@@ -9,6 +9,7 @@ export function Skills() {
       skills: [
         { name: "Java" },
         { name: "Python" },
+        { name: "TypeScript" },
         { name: "Node.js" },
         { name: "C" },
       ],
@@ -22,6 +23,8 @@ export function Skills() {
         { name: "Fault Tolerance" },
         { name: "File Replication" },
         { name: "Failover Automation" },
+        { name: "Saga Pattern" },
+        { name: "Event-driven Architecture" },
       ],
     },
     {
@@ -29,10 +32,13 @@ export function Skills() {
       context: "Deployed and managed containerised workloads on AWS and GCP in production",
       color: "green",
       skills: [
+        { name: "Docker" },
         { name: "Kubernetes" },
-        { name: "AWS EKS" },
+        { name: "AWS EC2/RDS" },
         { name: "GCP GKE" },
-        { name: "CI/CD" },
+        { name: "Helm" },
+        { name: "Terraform" },
+        { name: "GitHub Actions CI/CD" },
       ],
     },
     {
@@ -145,7 +151,7 @@ export function Skills() {
         >
           <p className="text-gray-500 text-sm mb-6">Also experienced with</p>
           <div className="flex flex-wrap gap-3 justify-center">
-            {["SQLite", "MSSQL", "Java Servlets", "JSP", "Flask", "React", "Git", "Gradle", "Maven", "TCP/IP", "DNS", "Linux", "OOP", "DSA"].map(
+            {["Spring Boot", "FastAPI", "REST APIs", "SQLite", "MSSQL", "Java Servlets", "JSP", "Flask", "React", "Git", "GitHub", "Gradle", "Maven", "Ant", "TCP/IP", "DNS", "HTTP", "Linux", "Operating Systems", "OOP", "DSA"].map(
               (tech) => (
                 <span
                   key={tech}
