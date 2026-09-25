@@ -194,6 +194,9 @@ export function Contact() {
                 {'>'} AVAILABILITY: OPEN TO OPPORTUNITIES
               </p>
               <p className="text-sm text-gray-500 font-mono mt-2">
+                {'>'} WORK AUTHORISATION: STAMP 1G (ELIGIBLE FULL-TIME)
+              </p>
+              <p className="text-sm text-gray-500 font-mono mt-2">
                 {'>'} PHONE: +353 (089) 2529993
               </p>
             </div>

@@ -6,8 +6,9 @@ type Project = {
   description: string;
   image: string;
   tech: string[];
-  github: string;
+  github?: string;
   live?: string;
+  status?: string;
   accent: string;
 };
 
@@ -53,6 +54,16 @@ export function Projects() {
       tech: ["Python", "FastAPI", "Supabase", "Judge0 CE", "React", "TypeScript", "Monaco Editor", "scikit-learn (BKT)", "GitHub Actions", "GCP"],
       github: "https://github.com/rakeshlakshmanan/AdaptiveEliteCode",
       accent: "amber",
+    },
+    {
+      title: "Modern Delay-Tolerant Email",
+      description:
+        "MSc dissertation (supervised by Stephen Farrell, co-author of RFC 9174) on filtering spam over Delay-Tolerant Networking on deep-space links. Built a five-node testbed emulating an Earth–Moon link with real mail infrastructure (Postfix, Dovecot, ION-DTN, BPMail) and benchmarked SpamAssassin, rspamd, and Vipul's Razor against 681 spam messages under a 1.3s one-way delay — measuring per-message verdicts, scan times, and bandwidth to recommend timeout-hardening for high-latency links.",
+      image:
+        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1080&q=80",
+      tech: ["Python", "Bash", "ION-DTN", "BPMail", "Postfix", "Dovecot", "SpamAssassin", "rspamd", "DNSBL", "Linux VMs", "tcpdump"],
+      status: "COMPLETED",
+      accent: "cyan",
     },
   ];
 
@@ -164,7 +175,7 @@ export function Projects() {
                         <div className="flex items-center gap-2 mb-4">
                           <div className={`w-2 h-2 ${accentClasses.border.replace('border-', 'bg-')} rounded-full animate-pulse`} />
                           <span className={`${accentClasses.text} text-sm font-mono`}>
-                            STATUS: DEPLOYED
+                            STATUS: {project.status ?? "DEPLOYED"}
                           </span>
                         </div>
                         
@@ -189,15 +200,17 @@ export function Projects() {
                       </div>
                       
                       <div className="flex gap-4">
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`flex items-center gap-2 px-6 py-3 border ${accentClasses.border} ${accentClasses.text} rounded-lg hover:bg-white/5 transition-all`}
-                        >
-                          <Github className="w-4 h-4" />
-                          View on GitHub
-                        </a>
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex items-center gap-2 px-6 py-3 border ${accentClasses.border} ${accentClasses.text} rounded-lg hover:bg-white/5 transition-all`}
+                          >
+                            <Github className="w-4 h-4" />
+                            View on GitHub
+                          </a>
+                        )}
                         {project.live && (
                           <a
                             href={project.live}

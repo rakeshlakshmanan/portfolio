@@ -24,6 +24,8 @@ export function Skills() {
         { name: "File Replication" },
         { name: "Failover Automation" },
         { name: "Saga Pattern" },
+        { name: "Distributed Locking" },
+        { name: "Reconciliation" },
         { name: "Event-driven Architecture" },
       ],
     },
@@ -38,11 +40,14 @@ export function Skills() {
         { name: "GCP GKE" },
         { name: "Helm" },
         { name: "Terraform" },
+        { name: "Istio" },
+        { name: "Prometheus" },
+        { name: "Grafana" },
         { name: "GitHub Actions CI/CD" },
       ],
     },
     {
-      category: "Databases",
+      category: "Databases & Messaging",
       context: "Mainly worked on PostgreSQL query optimisation within the Mickey internal framework",
       color: "cyan",
       skills: [
@@ -50,6 +55,8 @@ export function Skills() {
         { name: "MySQL" },
         { name: "MongoDB" },
         { name: "ClickHouse" },
+        { name: "Redis" },
+        { name: "RabbitMQ" },
       ],
     },
   ];
@@ -151,7 +158,7 @@ export function Skills() {
         >
           <p className="text-gray-500 text-sm mb-6">Also experienced with</p>
           <div className="flex flex-wrap gap-3 justify-center">
-            {["Spring Boot", "FastAPI", "REST APIs", "SQLite", "MSSQL", "Java Servlets", "JSP", "Flask", "React", "Git", "GitHub", "Gradle", "Maven", "Ant", "TCP/IP", "DNS", "HTTP", "Linux", "Operating Systems", "OOP", "DSA"].map(
+            {["Spring Boot", "Spring Security", "FastAPI", "REST APIs", "Multithreading & Concurrency", "SQLite", "MSSQL", "Java Servlets", "JSP", "Flask", "React", "Git", "GitHub", "Gradle", "Maven", "Ant", "TCP/IP", "DNS", "HTTP", "Delay-Tolerant Networking (DTN)", "Linux", "Operating Systems", "OOP", "DSA"].map(
               (tech) => (
                 <span
                   key={tech}

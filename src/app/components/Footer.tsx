@@ -14,7 +14,7 @@ export function Footer() {
               </span>
             </h3>
             <p className="text-gray-500 text-sm font-mono">
-              {'>'} Backend Engineer · Dublin, Ireland
+              {'>'} Software Engineer · Dublin, Ireland
             </p>
           </div>
 

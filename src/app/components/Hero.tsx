@@ -41,8 +41,11 @@ export function Hero() {
         >
           <h2 className="text-2xl md:text-4xl mb-2">
             <span className="text-green-400">&gt;</span>{" "}
-            <span className="text-white">Backend Engineer</span>
+            <span className="text-white">Software Engineer</span>
           </h2>
+          <p className="text-cyan-400 text-base md:text-lg mb-2 font-mono tracking-wide">
+            Backend · Distributed Systems · Full-Stack
+          </p>
           <p className="text-gray-400 text-lg md:text-xl">
             Building high-availability distributed systems & cloud-native architectures
           </p>

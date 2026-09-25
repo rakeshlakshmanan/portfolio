@@ -10,14 +10,16 @@ export function Experience() {
       period: "06/2023 – 08/2025",
       image: `${import.meta.env.BASE_URL}zoho.jpeg`,
       highlights: [
-        "Architected and engineered Mickey, an internal Java-based platform framework used by multiple product teams, reducing development time and improving long-term maintainability.",
-        "Enhanced failover and recovery mechanisms with automated upgrade workflows, reducing manual intervention during failovers by 60% and recovery time by 35%.",
-        "Designed a four-node High-Availability and Disaster Recovery topology using configuration-driven scheduling and Robocopy-based replication, achieving 99.95% uptime.",
-        "Built and owned FileSync, a standalone Java NIO–based file replication utility, reducing file transfer error rates from 22% to 7%.",
-        "Contributed to distributed system architecture supporting deployments across 100+ nodes through scalability planning and performance optimization.",
-        "Integrated ClickHouse as an analytics-optimized database backend into the Mickey framework, letting analytics-heavy teams leverage fast columnar reads as an alternative to the default PostgreSQL/MSSQL storage layer.",
-        "Scaled the Mickey framework to 20+ internal teams, contributing to a ~10% increase in customer growth across adopting teams through improved platform reliability and reduced onboarding friction.",
-        "Mentored two summer interns on high availability and distributed systems architecture, guiding them through HA topology design, fault-tolerance patterns, and production deployment practices.",
+        "Scaled Mickey, Zoho's internal Java platform framework, to 20+ product teams by architecting reusable components that cut development time and onboarding friction, contributing to ~10% customer growth across adopting teams.",
+        "Achieved 99.95% uptime in distributed production environments by designing a four-node High-Availability and Disaster Recovery (HA/DR) topology with configuration-driven scheduling and Robocopy-based replication.",
+        "Reduced manual intervention during failovers by ~60% and recovery time by ~35% by automating upgrade workflows and hardening server-to-server file transfer in the failover and recovery mechanisms.",
+        "Contributed to scalability planning, architecture design, and performance tuning of distributed systems supporting production deployments across 100+ nodes.",
+        "Enabled 10 analytics-heavy teams to adopt fast columnar reads by integrating ClickHouse as an optional database backend alongside PostgreSQL/MSSQL in the framework.",
+        "Designed and developed the Read-Only Server module framework, a reusable solution adopted by 15+ product teams, and supported its integration into their products.",
+        "Built DBScanner, a tool relied on regularly by 20+ product teams that compares two databases and produces clear, structured difference reports to streamline migrations.",
+        "Built PGMigrate, turning complex manual PostgreSQL version upgrades into a straightforward, repeatable workflow and cutting upgrade effort by ~30%.",
+        "Resolved 200 long-standing defects in the main codebase by partnering with the QA team to prioritise, reproduce, and fix issues through to root cause.",
+        "Mentored two summer interns on HA topology design, fault-tolerance patterns, and production deployment practices.",
       ],
     },
     {
@@ -27,8 +29,9 @@ export function Experience() {
       period: "01/2023 – 05/2023",
       image: `${import.meta.env.BASE_URL}zoho.jpeg`,
       highlights: [
-        "Architected a test automation framework for Java Swing applications, reducing manual testing effort by 60% and expanding regression coverage by 40%.",
-        "Led development of a Java NIO filesystem provider, simplifying HDFS integration for 15+ applications and enhancing team efficiency by 20%.",
+        "Reduced manual testing effort by 60% and expanded regression coverage by 40% by architecting a test automation framework for Java Swing applications.",
+        "Led development of a Java NIO filesystem provider that unified HDFS data access for 15+ applications, improving team efficiency by 20%.",
+        "Cut file-transfer error rates from 22% to 7% by building FileSync, a Java NIO–based file replication utility with robust error handling, integrated into the HA module.",
       ],
     },
     {
@@ -38,8 +41,8 @@ export function Experience() {
       period: "04/2022 – 09/2022",
       image: `${import.meta.env.BASE_URL}zoho.jpeg`,
       highlights: [
-        "Built and optimized a SQLite-backed queue mechanism in Java to manage tasks and messages in FIFO order.",
-        "Investigated and resolved 500+ production and support tickets over 6 months, improving system stability and reducing recurring defects.",
+        "Built a SQLite-backed queue in Java guaranteeing FIFO ordering for task and message processing.",
+        "Resolved 500+ production and support tickets over six months and shipped 100+ bug fixes to the test automation platform.",
       ],
     },
   ];
@@ -48,8 +51,8 @@ export function Experience() {
     {
       degree: "Master's in Computer Science – Future Networked Systems",
       institution: "Trinity College Dublin",
-      period: "09/2025 – Present",
-      detail: "Grade 1:1 Expected",
+      period: "09/2025 – 08/2026",
+      detail: "Grade 1:1 (Distinction)",
       image: `${import.meta.env.BASE_URL}trinity.jpg`,
     },
     {
