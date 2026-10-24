@@ -7,12 +7,12 @@ const capabilities = [
   {
     icon: Network,
     title: "Distributed systems",
-    detail: "HA/DR topologies, replication, and failover automation at 99.95% uptime.",
+    detail: "HA/DR topologies, read replicas, and automatic failover at 99.95% uptime.",
   },
   {
     icon: Layers,
     title: "Platform engineering",
-    detail: "Reusable Java frameworks adopted across 20+ product teams.",
+    detail: "Mickey, Zoho's Java data-access framework, used by 20+ product teams.",
   },
   {
     icon: Cloud,
@@ -43,17 +43,18 @@ export function About() {
           </h2>
           <div className="mt-6 space-y-4 text-zinc-400">
             <p>
-              I spent roughly three years at Zoho Corporation building the
-              infrastructure that keeps software running when nobody is watching.
-              I designed a four-node HA/DR topology that held 99.95% uptime,
-              hardened failover and file-replication paths, and scaled an internal
-              Java platform framework to more than 20 product teams.
+              I spent three years at Zoho Corporation building the platform that
+              upgrades Zoho's products and the data-access framework under them.
+              I built Delta's upgrade features with rollback and health checks,
+              added an MCP server and multi-agent rollback workflow, and built
+              features in Mickey, a Java framework used by 20+ product teams,
+              including a four-node HA/DR topology at 99.95% uptime.
             </p>
             <p>
               I recently finished an MSc in Computer Science at Trinity College
               Dublin with a Distinction, specialising in Future Networked Systems.
-              I work comfortably across Java and Spring Boot, Python and FastAPI,
-              and React and TypeScript.
+              I work across Java and Spring Boot, Python and FastAPI, and React
+              and TypeScript, and build my own projects with Claude Code agents.
             </p>
           </div>
 

@@ -3,21 +3,24 @@ import { motion, useReducedMotion } from "motion/react";
 
 const jobs = [
   {
-    title: "Member Technical Staff",
+    title: "Member Technical Staff (Software Engineer)",
     company: "Zoho Corporation",
     location: "Chennai, India",
     period: "06/2023 - 08/2025",
     highlights: [
-      "Scaled Mickey, Zoho's internal Java platform framework, to 20+ product teams by architecting reusable components that cut development time and onboarding friction, contributing to ~10% customer growth across adopting teams.",
-      "Achieved 99.95% uptime in distributed production environments by designing a four-node High-Availability and Disaster Recovery (HA/DR) topology with configuration-driven scheduling and Robocopy-based replication.",
-      "Reduced manual intervention during failovers by ~60% and recovery time by ~35% by automating upgrade workflows and hardening server-to-server file transfer.",
-      "Contributed to scalability planning, architecture design, and performance tuning of distributed systems supporting production deployments across 100+ nodes.",
-      "Enabled 10 analytics-heavy teams to adopt fast columnar reads by integrating ClickHouse as an optional database backend alongside PostgreSQL/MSSQL.",
-      "Designed and developed the Read-Only Server module framework, a reusable solution adopted by 15+ product teams.",
-      "Built DBScanner, used by 20+ product teams to compare two databases and produce clear difference reports that streamline migrations.",
-      "Built PGMigrate, turning complex manual PostgreSQL version upgrades into a repeatable workflow and cutting upgrade effort by ~30%.",
-      "Resolved 200 long-standing defects in the main codebase by partnering with the QA team to reproduce and fix issues through to root cause.",
-      "Mentored two summer interns on HA topology design, fault-tolerance patterns, and production deployment practices.",
+      "Built full-stack upgrade features for Delta, the platform that upgrades all of Zoho's products, with Java, Spring Boot REST APIs, and Angular. Upgrades run with backup, health checks, rollback, and failure alerts, which removed ~60% of the manual work from upgrades and failovers and cut recovery time by ~35%.",
+      "Owned DevOps for Delta on Zoho's cloud, running its builds, deployments, and monitoring, with its APIs served through Zoho's API gateway.",
+      "Cut mean time to rollback on failed upgrades by 45% across 1,200 upgrade runs by building an MCP server over Delta's Spring Boot REST APIs and a multi-agent workflow (planner, monitor, and rollback agents with human approval). Log triage goes to Claude Haiku and root-cause analysis to a larger model, keeping LLM cost 70% below a single-large-model setup.",
+      "Built full-stack test-case and test-run features for Quality Console, Zoho's QA platform, with Java, Spring Boot, and Angular. Suites run through Jenkins CI/CD pipelines in Docker, and test, JaCoCo coverage, and SonarQube results are indexed in Elasticsearch for reporting, which cut release time by 30%.",
+      "Raised line coverage on legacy modules from 52% to 74% (JaCoCo) with a coverage-gap agent that runs Claude Code headless in a Docker sandbox to write JUnit tests and opens pull requests only when they pass. Picked the model after testing three on 200 past coverage gaps for pass rate, cost, and latency.",
+      "Added AI features to Zoho products by integrating Zia, Zoho's AI platform, through its APIs.",
+      "Built core features of Mickey, Zoho's Java data-access framework used by 20+ product teams in place of hand-written SQL, including its query API across PostgreSQL and MSSQL and schema migrations, keeping every change backward compatible for products already on it.",
+      "Built Mickey's Read-Only Server module, adopted by 15+ product teams, which routes read queries to read-only replicas and moved ~80% of query traffic off the primary database.",
+      "Added ClickHouse as a columnar backend behind Mickey's query API for analytics-heavy products, cutting typical analytic query time from ~2.1 s to ~0.15 s and storage by ~10x.",
+      "Built features in Mickey's on-premise HA module, a four-node HA/DR topology across two sites with automatic failover, config-driven scheduling, and Robocopy replication, delivering 99.95% uptime for on-premise customers.",
+      "Built DBScanner, a Java tool used by 20+ product teams that compares the schemas and data of two databases over JDBC and reports every difference, cutting the time to find migration differences by 90%.",
+      "Investigated and fixed 200 long-standing defects with QA in Agile Scrum sprints, tracing each to root cause, and reviewed teammates' code before it merged.",
+      "Mentored two interns on distributed architecture, high availability, and fault tolerance, walking them through our HA/DR topology and how automatic failover works.",
     ],
   },
   {
@@ -26,9 +29,9 @@ const jobs = [
     location: "Chennai, India",
     period: "01/2023 - 05/2023",
     highlights: [
-      "Reduced manual testing effort by 60% and expanded regression coverage by 40% by architecting a test automation framework for Java Swing applications.",
-      "Led development of a Java NIO filesystem provider that unified HDFS data access for 15+ applications, improving team efficiency by 20%.",
-      "Cut file-transfer error rates from 22% to 7% by building FileSync, a Java NIO-based file replication utility integrated into the HA module.",
+      "Cut manual testing effort by 60% and expanded regression coverage by 40% by building a test automation framework for Java Swing desktop applications.",
+      "Cut file-transfer error rates from 22% to 7% with FileSync, a Java NIO utility that keeps files in sync between primary and backup servers, used in the HA module.",
+      "Built a shared Java NIO filesystem provider through the JDK's java.nio.file service-provider interface, replacing per-application HDFS client code so 15+ applications read and write HDFS through the standard file API.",
     ],
   },
   {
@@ -37,30 +40,29 @@ const jobs = [
     location: "Chennai, India",
     period: "04/2022 - 09/2022",
     highlights: [
-      "Built a SQLite-backed queue in Java guaranteeing FIFO ordering for task and message processing.",
-      "Resolved 500+ production and support tickets over six months and shipped 100+ bug fixes to the test automation platform.",
+      "Investigated and closed 500+ production support tickets and shipped 100+ bug fixes to the test automation platform in six months.",
+      "Built a SQLite-backed queue in Java that guarantees FIFO ordering for task and message processing.",
     ],
   },
 ];
 
 const education = [
   {
-    degree: "MSc Computer Science, Future Networked Systems",
+    degree: "Master's in Computer Science, Future Networked Systems",
     institution: "Trinity College Dublin",
     period: "09/2025 - 08/2026",
-    detail: "Grade 1:1 (Distinction)",
+    detail: "1:1, Distinction",
   },
   {
-    degree: "BEng Computer Science",
+    degree: "Bachelor's in Computer Science",
     institution: "St. Joseph's College of Engineering, India",
     period: "06/2019 - 04/2023",
-    detail: "Grade 1:1 (92.3%)",
+    detail: "1:1, Distinction (CGPA 9.23/10)",
   },
 ];
 
 const achievements = [
-  "Mickey Emerging Programmer (Q4 FY23) at Zoho for high-impact contributions to the internal Java framework.",
-  "LRG Naidu Educational Trust Scholarship (ELGI Scholar) for undergraduate academic excellence.",
+  "Awarded Mickey Emerging Programmer (Q4 FY23) for building reusable components in Zoho's Java data-access framework.",
 ];
 
 export function Experience() {

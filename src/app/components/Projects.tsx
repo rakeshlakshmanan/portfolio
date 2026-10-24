@@ -20,7 +20,7 @@ const img = (seed: string) =>
 const featured: Project = {
   title: "SmartEnoughCity",
   blurb:
-    "Cloud-native urban transport intelligence for the Greater Dublin Area. Four microservices ingest 15+ real-time transport APIs into PostgreSQL/PostGIS and serve ML-driven mobility indicators through a React dashboard. Deployed to GKE via Helm and Terraform, backed by a ~600-test suite with a 75% coverage gate.",
+    "A cloud-native transport platform for the Greater Dublin Area, built as a team project at Trinity. Four services ingest real-time data from 15+ transport APIs (GTFS, GTFS-RT, GBFS, Irish Rail and Luas XML) into PostgreSQL/PostGIS and serve scikit-learn demand forecasts, disruption alerts, and city-planning tools through a React dashboard. It runs on GKE with Helm and Istio, is provisioned with Terraform, exports Micrometer metrics to Prometheus and Grafana with logs in Loki, and has ~600 tests behind a 75% coverage gate. The team built it with Claude Code agents working in parallel, guided by shared CLAUDE.md files and Claude Skills.",
   image: img("smartenoughcity-transit"),
   tech: [
     "Java 17",
@@ -34,6 +34,8 @@ const featured: Project = {
     "Helm",
     "Terraform",
     "Istio",
+    "Keycloak",
+    "Claude Code",
   ],
   github: "https://github.com/rakeshlakshmanan/SmartEnoughCity",
 };
@@ -42,17 +44,17 @@ const projects: Project[] = [
   {
     title: "Distributed Traffic Booking System",
     blurb:
-      "A globally distributed road-booking platform enforcing per-segment capacity across Ireland, UK and France. Six services with a Saga orchestrator, Redis distributed locks against double-booking, and a self-healing reconciler on a multi-VM AWS topology.",
+      "A road-booking platform that enforces per-segment road capacity across three regions: Ireland, the UK, and France. Six FastAPI services with a Saga orchestrator coordinate cross-region bookings and compensating transactions. Redis locks per road segment and time slot prevent double-booking, a Dijkstra routing engine finds routes, and a reconciler cleans up orphaned reservations every 120 s. It runs on AWS EC2 and RDS with RabbitMQ consumers and a React and TypeScript front end.",
     image: img("distributed-booking-roads"),
-    tech: ["Python", "FastAPI", "PostgreSQL", "Redis", "RabbitMQ", "AWS"],
+    tech: ["Python 3.12", "FastAPI", "PostgreSQL", "Redis", "RabbitMQ", "React", "TypeScript", "Docker", "AWS"],
     github: "https://github.com/rakeshlakshmanan/distributed-road-booking",
   },
   {
     title: "DevVault",
     blurb:
-      "An AI-powered developer bookmark manager. Every save scrapes the page and calls Gemini 2.5 Flash on an event-driven pipeline that keeps AI latency off the request path. JWT and Google OAuth2 auth, a social layer, deployed end-to-end on GKE.",
+      "A full-stack bookmark manager that tags and summarises every saved page with AI. On save, the backend scrapes the page through Jina Reader, and an event-driven pipeline of Spring transactional events on a dedicated thread pool sends it to Gemini 2.5 Flash for a summary and 3-5 tags, so the save itself returns instantly. 14 React pages cover bookmarks, collections, tags, favourites, friends, sharing, and a public Explore feed. Built with multiple Claude Code agents working in parallel, guided by CLAUDE.md files and custom Skills, and deployed to GKE through GitHub Actions.",
     image: img("devvault-bookmarks"),
-    tech: ["Java 17", "Spring Boot", "PostgreSQL", "Gemini", "React", "GKE"],
+    tech: ["Java 17", "Spring Boot", "Spring Security", "PostgreSQL", "Gemini 2.5 Flash", "Jina Reader", "React", "TypeScript", "Docker", "Kubernetes (GKE)", "GitHub Actions", "Claude Code"],
     github: "https://github.com/rakeshlakshmanan/DevVault",
     live: "https://devvault.qd.je",
   },
@@ -67,9 +69,10 @@ const projects: Project[] = [
   {
     title: "Modern Delay-Tolerant Email",
     blurb:
-      "MSc dissertation on filtering spam over Delay-Tolerant Networking on deep-space links. A five-node testbed emulating an Earth-Moon link benchmarks SpamAssassin, rspamd and Vipul's Razor against 681 spam messages under a 1.3s delay.",
+      "MSc dissertation at Trinity College Dublin, supervised by Professor Stephen Farrell (co-author of RFC 5326), on how spam filters behave over delay-tolerant networking (DTN) on Earth-Moon links. Built a five-node virtual machine testbed (Ubuntu 22.04 under UTM) emulating an Earth-Moon link with real mail software: Postfix and Dovecot for delivery, ION-DTN and BPMail for transport, and a local DNS resolver for blocklist lookups. Tested SpamAssassin, rspamd, and Vipul's Razor against 681 spam messages with a 1.3 s delay on the relay, in three scenarios (no delay, delay with default timeouts, delay with timeouts reduced below the round trip), recording per-message verdicts, scan times, and packet captures.",
     image: img("delay-tolerant-space"),
-    tech: ["Python", "ION-DTN", "BPMail", "Postfix", "SpamAssassin", "Linux"],
+    tech: ["Python", "Bash", "ION-DTN", "BPMail", "Postfix", "Dovecot", "SpamAssassin", "rspamd", "Vipul's Razor", "Unbound DNS", "tcpdump", "netem"],
+    github: "https://github.com/rakeshlakshmanan/Modern-delay-tolerant-email",
     note: "MSc dissertation, Trinity College Dublin",
   },
 ];

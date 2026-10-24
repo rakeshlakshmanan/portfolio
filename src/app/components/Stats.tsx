@@ -12,10 +12,10 @@ type Stat = {
 // All figures are real, sourced from the CV.
 const stats: Stat[] = [
   { value: 99.95, decimals: 2, suffix: "%", label: "Production uptime" },
-  { value: 100, suffix: "+", label: "Nodes in production" },
+  { value: 80, suffix: "%", label: "Query traffic off primary DB" },
   { value: 20, suffix: "+", label: "Teams on the platform" },
   { value: 500, suffix: "+", label: "Tickets resolved" },
-  { value: 60, suffix: "%", label: "Less manual failover" },
+  { value: 60, suffix: "%", label: "Less manual upgrade work" },
   { value: 3, suffix: " yrs", label: "Industry experience" },
 ];
 
