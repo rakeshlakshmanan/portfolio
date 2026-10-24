@@ -77,6 +77,19 @@ const projects: Project[] = [
   },
 ];
 
+const more: { title: string; blurb: string; tech: string[] }[] = [
+  {
+    title: "Anti-AI CAPTCHA System",
+    blurb: "Behavioural analysis to distinguish humans from bots.",
+    tech: ["Python", "Flask", "JavaScript"],
+  },
+  {
+    title: "Fall Detection Mobile App",
+    blurb: "Accelerometer-based fall detection with SMS alerts.",
+    tech: ["Java", "Android", "Twilio"],
+  },
+];
+
 function TechRow({ tech, max }: { tech: string[]; max?: number }) {
   const shown = max ? tech.slice(0, max) : tech;
   const extra = max ? tech.length - shown.length : 0;
@@ -216,6 +229,28 @@ export function Projects() {
                     {project.note}
                   </span>
                 )}
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* More projects */}
+        <h3 className="mt-16 text-lg font-semibold text-zinc-100">
+          More projects
+        </h3>
+        <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {more.map((project, i) => (
+            <motion.article
+              key={project.title}
+              {...reveal(i * 0.06)}
+              className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5 transition-all hover:-translate-y-0.5 hover:border-cyan-500/40"
+            >
+              <h4 className="font-semibold text-zinc-100">{project.title}</h4>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                {project.blurb}
+              </p>
+              <div className="mt-4">
+                <TechRow tech={project.tech} />
               </div>
             </motion.article>
           ))}
