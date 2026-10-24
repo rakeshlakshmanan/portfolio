@@ -1,194 +1,156 @@
-import { motion } from "motion/react";
-import { Briefcase, GraduationCap, Award } from "lucide-react";
+"use client";
+import { motion, useReducedMotion } from "motion/react";
+
+const jobs = [
+  {
+    title: "Member Technical Staff",
+    company: "Zoho Corporation",
+    location: "Chennai, India",
+    period: "06/2023 - 08/2025",
+    highlights: [
+      "Scaled Mickey, Zoho's internal Java platform framework, to 20+ product teams by architecting reusable components that cut development time and onboarding friction, contributing to ~10% customer growth across adopting teams.",
+      "Achieved 99.95% uptime in distributed production environments by designing a four-node High-Availability and Disaster Recovery (HA/DR) topology with configuration-driven scheduling and Robocopy-based replication.",
+      "Reduced manual intervention during failovers by ~60% and recovery time by ~35% by automating upgrade workflows and hardening server-to-server file transfer.",
+      "Contributed to scalability planning, architecture design, and performance tuning of distributed systems supporting production deployments across 100+ nodes.",
+      "Enabled 10 analytics-heavy teams to adopt fast columnar reads by integrating ClickHouse as an optional database backend alongside PostgreSQL/MSSQL.",
+      "Designed and developed the Read-Only Server module framework, a reusable solution adopted by 15+ product teams.",
+      "Built DBScanner, used by 20+ product teams to compare two databases and produce clear difference reports that streamline migrations.",
+      "Built PGMigrate, turning complex manual PostgreSQL version upgrades into a repeatable workflow and cutting upgrade effort by ~30%.",
+      "Resolved 200 long-standing defects in the main codebase by partnering with the QA team to reproduce and fix issues through to root cause.",
+      "Mentored two summer interns on HA topology design, fault-tolerance patterns, and production deployment practices.",
+    ],
+  },
+  {
+    title: "Project Trainee",
+    company: "Zoho Corporation",
+    location: "Chennai, India",
+    period: "01/2023 - 05/2023",
+    highlights: [
+      "Reduced manual testing effort by 60% and expanded regression coverage by 40% by architecting a test automation framework for Java Swing applications.",
+      "Led development of a Java NIO filesystem provider that unified HDFS data access for 15+ applications, improving team efficiency by 20%.",
+      "Cut file-transfer error rates from 22% to 7% by building FileSync, a Java NIO-based file replication utility integrated into the HA module.",
+    ],
+  },
+  {
+    title: "Summer Intern",
+    company: "Zoho Corporation",
+    location: "Chennai, India",
+    period: "04/2022 - 09/2022",
+    highlights: [
+      "Built a SQLite-backed queue in Java guaranteeing FIFO ordering for task and message processing.",
+      "Resolved 500+ production and support tickets over six months and shipped 100+ bug fixes to the test automation platform.",
+    ],
+  },
+];
+
+const education = [
+  {
+    degree: "MSc Computer Science, Future Networked Systems",
+    institution: "Trinity College Dublin",
+    period: "09/2025 - 08/2026",
+    detail: "Grade 1:1 (Distinction)",
+  },
+  {
+    degree: "BEng Computer Science",
+    institution: "St. Joseph's College of Engineering, India",
+    period: "06/2019 - 04/2023",
+    detail: "Grade 1:1 (92.3%)",
+  },
+];
+
+const achievements = [
+  "Mickey Emerging Programmer (Q4 FY23) at Zoho for high-impact contributions to the internal Java framework.",
+  "LRG Naidu Educational Trust Scholarship (ELGI Scholar) for undergraduate academic excellence.",
+];
 
 export function Experience() {
-  const jobs = [
-    {
-      title: "Member Technical Staff",
-      company: "Zoho Corporation",
-      location: "Chennai, India",
-      period: "06/2023 – 08/2025",
-      image: `${import.meta.env.BASE_URL}zoho.jpeg`,
-      highlights: [
-        "Scaled Mickey, Zoho's internal Java platform framework, to 20+ product teams by architecting reusable components that cut development time and onboarding friction, contributing to ~10% customer growth across adopting teams.",
-        "Achieved 99.95% uptime in distributed production environments by designing a four-node High-Availability and Disaster Recovery (HA/DR) topology with configuration-driven scheduling and Robocopy-based replication.",
-        "Reduced manual intervention during failovers by ~60% and recovery time by ~35% by automating upgrade workflows and hardening server-to-server file transfer in the failover and recovery mechanisms.",
-        "Contributed to scalability planning, architecture design, and performance tuning of distributed systems supporting production deployments across 100+ nodes.",
-        "Enabled 10 analytics-heavy teams to adopt fast columnar reads by integrating ClickHouse as an optional database backend alongside PostgreSQL/MSSQL in the framework.",
-        "Designed and developed the Read-Only Server module framework, a reusable solution adopted by 15+ product teams, and supported its integration into their products.",
-        "Built DBScanner, a tool relied on regularly by 20+ product teams that compares two databases and produces clear, structured difference reports to streamline migrations.",
-        "Built PGMigrate, turning complex manual PostgreSQL version upgrades into a straightforward, repeatable workflow and cutting upgrade effort by ~30%.",
-        "Resolved 200 long-standing defects in the main codebase by partnering with the QA team to prioritise, reproduce, and fix issues through to root cause.",
-        "Mentored two summer interns on HA topology design, fault-tolerance patterns, and production deployment practices.",
-      ],
-    },
-    {
-      title: "Project Trainee",
-      company: "Zoho Corporation",
-      location: "Chennai, India",
-      period: "01/2023 – 05/2023",
-      image: `${import.meta.env.BASE_URL}zoho.jpeg`,
-      highlights: [
-        "Reduced manual testing effort by 60% and expanded regression coverage by 40% by architecting a test automation framework for Java Swing applications.",
-        "Led development of a Java NIO filesystem provider that unified HDFS data access for 15+ applications, improving team efficiency by 20%.",
-        "Cut file-transfer error rates from 22% to 7% by building FileSync, a Java NIO–based file replication utility with robust error handling, integrated into the HA module.",
-      ],
-    },
-    {
-      title: "Summer Intern",
-      company: "Zoho Corporation",
-      location: "Chennai, India",
-      period: "04/2022 – 09/2022",
-      image: `${import.meta.env.BASE_URL}zoho.jpeg`,
-      highlights: [
-        "Built a SQLite-backed queue in Java guaranteeing FIFO ordering for task and message processing.",
-        "Resolved 500+ production and support tickets over six months and shipped 100+ bug fixes to the test automation platform.",
-      ],
-    },
-  ];
-
-  const education = [
-    {
-      degree: "Master's in Computer Science – Future Networked Systems",
-      institution: "Trinity College Dublin",
-      period: "09/2025 – 08/2026",
-      detail: "Grade 1:1 (Distinction)",
-      image: `${import.meta.env.BASE_URL}trinity.jpg`,
-    },
-    {
-      degree: "Bachelor's in Computer Science",
-      institution: "St. Joseph's College of Engineering, India",
-      period: "06/2019 – 04/2023",
-      detail: "Final grade 1:1 (92.3%)",
-      image: `${import.meta.env.BASE_URL}st.josephs.jpeg`,
-    },
-  ];
-
-  const achievements = [
-    "Awarded Mickey Emerging Programmer (Q4 FY23) for high-impact contributions to the internal framework.",
-    "Recipient of LRG Naidu Educational Trust Scholarship (ELGI Scholar) for undergraduate academic excellence.",
-  ];
+  const reduce = useReducedMotion();
+  const reveal = (delay = 0) =>
+    reduce
+      ? { initial: false as const }
+      : {
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.2 },
+          transition: { duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] as const },
+        };
 
   return (
-    <section className="relative py-32 bg-gradient-to-b from-black/60 via-gray-950/60 to-black/60 overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px] -translate-y-1/2" />
+    <section id="experience" className="border-t border-white/5">
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
+        <span className="accent-gradient mb-5 block h-1 w-12 rounded-full" />
+        <h2 className="text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl">
+          Work history
+        </h2>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
-        >
-          <span className="text-fuchsia-400 text-sm tracking-widest mb-4 block">EXPERIENCE.LOG</span>
-          <h2 className="text-5xl md:text-6xl mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
-              Work History
-            </span>
-          </h2>
-        </motion.div>
-
-        {/* Work Experience */}
-        <div className="mb-24">
-          <div className="flex items-center gap-3 mb-10">
-            <Briefcase className="w-5 h-5 text-cyan-400" />
-            <h3 className="text-xl text-cyan-400 tracking-widest text-sm">EXPERIENCE</h3>
-          </div>
-          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-10">
-            <div className="relative h-48 overflow-hidden">
-              <img src={jobs[0].image} alt={jobs[0].company} className="w-full h-full object-cover object-center" />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
-              <div className="absolute bottom-4 left-5">
-                <p className="text-cyan-400 font-mono text-sm">{jobs[0].company} · {jobs[0].location}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative pl-8 border-l border-gray-800 space-y-12">
+        {/* Timeline */}
+        <div className="mt-14 border-l border-zinc-800 pl-8">
+          <div className="space-y-14">
             {jobs.map((job, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <div className="absolute -left-[2.35rem] top-1.5 w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.8)]" />
-                <div className="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden hover:border-cyan-500/50 transition-colors">
-                  <div className="px-6 pt-5 pb-2 flex items-start justify-between gap-4">
-                    <div>
-                      <h4 className="text-xl text-white">{job.title}</h4>
-                      <p className="text-cyan-400 font-mono text-sm">{job.company} · {job.location}</p>
-                    </div>
-                    <span className="text-gray-400 text-xs font-mono whitespace-nowrap pt-1">{job.period}</span>
-                  </div>
-                  <ul className="space-y-2 p-6 pt-3">
-                    {job.highlights.map((point, i) => (
-                      <li key={i} className="flex items-start gap-3 text-gray-400 text-sm leading-relaxed">
-                        <span className="text-cyan-500 mt-1 shrink-0">›</span>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
+              <motion.div key={index} {...reveal(index * 0.05)} className="relative">
+                <span className="absolute -left-[2.55rem] top-1.5 h-3 w-3 rounded-full border-2 border-emerald-400 bg-zinc-950" />
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="text-xl font-semibold text-zinc-100">
+                    {job.title}
+                  </h3>
+                  <span className="font-mono text-xs text-zinc-500">
+                    {job.period}
+                  </span>
                 </div>
+                <p className="mt-1 font-mono text-sm text-emerald-400">
+                  {job.company}
+                  <span className="text-zinc-600"> / {job.location}</span>
+                </p>
+                <ul className="mt-4 space-y-2.5">
+                  {job.highlights.map((point, i) => (
+                    <li
+                      key={i}
+                      className="flex gap-3 text-sm leading-relaxed text-zinc-400"
+                    >
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-zinc-600" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Education & Achievements */}
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Education */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <GraduationCap className="w-5 h-5 text-fuchsia-400" />
-              <h3 className="text-sm text-fuchsia-400 tracking-widest">EDUCATION</h3>
-            </div>
-            <div className="space-y-6">
-              {education.map((edu, index) => (
-                <div key={index} className="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden hover:border-fuchsia-500/50 transition-colors flex h-44">
-                  <div className="w-1/2 shrink-0">
-                    <img src={edu.image} alt={edu.institution} className="w-full h-full object-cover object-center" />
+        {/* Education + achievements */}
+        <div className="mt-20 grid grid-cols-1 gap-12 lg:grid-cols-2">
+          <motion.div {...reveal()}>
+            <h3 className="text-lg font-semibold text-zinc-100">Education</h3>
+            <div className="mt-5 space-y-4">
+              {education.map((edu) => (
+                <div
+                  key={edu.institution}
+                  className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-5"
+                >
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <p className="font-medium text-zinc-100">{edu.institution}</p>
+                    <span className="font-mono text-xs text-zinc-500">
+                      {edu.period}
+                    </span>
                   </div>
-                  <div className="w-1/2 p-5 flex flex-col justify-center">
-                    <p className="text-white font-medium mb-2 leading-snug">{edu.degree}</p>
-                    <p className="text-fuchsia-400 text-sm font-mono mb-3">{edu.institution}</p>
-                    <span className="text-gray-500 font-mono text-xs mb-1">{edu.period}</span>
-                    <span className="text-green-400 font-mono text-xs">{edu.detail}</span>
-                  </div>
+                  <p className="mt-1 text-sm text-zinc-400">{edu.degree}</p>
+                  <p className="mt-2 font-mono text-xs text-emerald-400">
+                    {edu.detail}
+                  </p>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Achievements */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <Award className="w-5 h-5 text-green-400" />
-              <h3 className="text-sm text-green-400 tracking-widest">ACHIEVEMENTS</h3>
-            </div>
-            <div className="space-y-4">
-              {achievements.map((ach, index) => (
-                <div key={index} className="bg-gray-900 border border-gray-800 rounded-lg p-6 hover:border-green-500/50 transition-colors">
-                  <div className="flex items-start gap-3">
-                    <span className="text-green-400 text-lg mt-0.5">★</span>
-                    <p className="text-gray-300 text-sm leading-relaxed">{ach}</p>
-                  </div>
-                </div>
+          <motion.div {...reveal(0.1)}>
+            <h3 className="text-lg font-semibold text-zinc-100">Achievements</h3>
+            <ul className="mt-5 divide-y divide-zinc-800 border-t border-zinc-800">
+              {achievements.map((ach) => (
+                <li key={ach} className="py-4 text-sm leading-relaxed text-zinc-400">
+                  {ach}
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
         </div>
       </div>

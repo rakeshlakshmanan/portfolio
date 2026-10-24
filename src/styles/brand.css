@@ -1,0 +1,129 @@
+/*
+  Brand layer for the portfolio redesign.
+  Design language: restrained dark-tech. One accent (emerald), zinc neutrals.
+  Loaded after tailwind so @theme font tokens register.
+*/
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* offset anchor jumps so the sticky nav does not cover section headings */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #09090b; /* zinc-950, off-black (never pure #000) */
+  color: #e4e4e7; /* zinc-200 */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Emerald selection, matching the single locked accent */
+::selection {
+  background-color: rgba(16, 185, 129, 0.28);
+  color: #ffffff;
+}
+
+/* Accessible focus ring on the accent, used across interactive elements */
+:where(a, button, input, textarea):focus-visible {
+  outline: 2px solid #34d399; /* emerald-400 */
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/*
+  Colour + motion layer.
+  Accent gradient family (locked): emerald -> cyan -> indigo. Cool-tech, harmonised.
+  Used for: headline text, stat numbers, primary buttons, ambient aurora.
+*/
+.accent-gradient {
+  background-image: linear-gradient(120deg, #34d399 0%, #22d3ee 50%, #818cf8 100%);
+}
+
+.text-gradient {
+  background-image: linear-gradient(120deg, #34d399 0%, #22d3ee 45%, #818cf8 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 6s ease-in-out infinite;
+}
+
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Ambient aurora blobs (transform/opacity only, GPU-friendly) */
+@keyframes aurora-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(6%, 8%) scale(1.15);
+  }
+}
+@keyframes aurora-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate(-8%, -6%) scale(0.95);
+  }
+}
+@keyframes aurora-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(5%, -7%) scale(1.2);
+  }
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  will-change: transform;
+}
+.aurora-a {
+  animation: aurora-a 16s ease-in-out infinite;
+}
+.aurora-b {
+  animation: aurora-b 20s ease-in-out infinite;
+}
+.aurora-c {
+  animation: aurora-c 24s ease-in-out infinite;
+}
+
+/* Reduced motion: collapse all animation/transition to instant. MOTION_INTENSITY 5 > 3, mandatory. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

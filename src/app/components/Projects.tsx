@@ -1,234 +1,221 @@
-import { motion } from "motion/react";
-import { Github, ExternalLink } from "lucide-react";
+"use client";
+import { motion, useReducedMotion } from "motion/react";
+import { Github, ArrowUpRight } from "lucide-react";
 
 type Project = {
   title: string;
-  description: string;
+  blurb: string;
   image: string;
   tech: string[];
   github?: string;
   live?: string;
-  status?: string;
-  accent: string;
+  note?: string;
 };
 
-export function Projects() {
-  const projects: Project[] = [
-    {
-      title: "SmartEnoughCity",
-      description:
-        "Cloud-native urban transport intelligence platform for the Greater Dublin Area. A 4-service microservices system ingests real-time data from 15+ transport APIs (GTFS, GTFS-RT, GBFS, Irish Rail & Luas XML) into PostgreSQL/PostGIS and serves ML-driven mobility indicators, disruption alerts, and city-planning tools through an interactive React dashboard. Deployed to GKE via Helm, provisioned with Terraform, and backed by a ~600-test suite with a 75% coverage gate.",
-      image:
-        "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1080&q=80",
-      tech: ["Java 17", "Spring Boot", "Python", "FastAPI", "scikit-learn", "React", "TypeScript", "PostgreSQL/PostGIS", "Docker", "Kubernetes (GKE)", "Helm", "Terraform", "Istio", "Prometheus", "Grafana"],
-      github: "https://github.com/rakeshlakshmanan/SmartEnoughCity",
-      accent: "blue",
-    },
-    {
-      title: "Distributed Traffic Booking System",
-      description:
-        "A globally-distributed road-booking platform enforcing per-segment road capacity across three geographic regions (Ireland, UK, France). A 6-service architecture with a Saga orchestrator coordinating cross-region bookings and compensating transactions, Redis distributed locks to prevent double-booking under load, a Dijkstra shortest-path routing engine, and a self-healing saga reconciler — deployed on a multi-VM AWS topology with event-driven RabbitMQ consumers.",
-      image:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1080&q=80",
-      tech: ["Python", "FastAPI", "SQLAlchemy (async)", "PostgreSQL", "Redis", "RabbitMQ", "React", "TypeScript", "Docker", "AWS EC2/RDS"],
-      github: "https://github.com/rakeshlakshmanan/distributed-road-booking",
-      accent: "violet",
-    },
-    {
-      title: "DevVault",
-      description:
-        "A full-stack, AI-powered developer bookmark manager. On every save it scrapes the page via Jina AI Reader and asynchronously calls Google Gemini 2.5 Flash to generate summaries and tags through an event-driven pipeline that keeps AI latency off the request path. Features stateless JWT + Google OAuth2 auth, a friend/share social layer, and a public Explore feed — deployed end-to-end on GKE with multi-stage Docker builds and GitHub Actions CI/CD.",
-      image:
-        "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=1080&q=80",
-      tech: ["Java 17", "Spring Boot", "Spring Security", "PostgreSQL", "Google Gemini 2.5 Flash", "React", "TypeScript", "TanStack Query", "Docker", "Kubernetes (GKE)"],
-      github: "https://github.com/rakeshlakshmanan/DevVault",
-      live: "https://devvault.qd.je",
-      accent: "emerald",
-    },
-    {
-      title: "EliteCode",
-      description:
-        "An adaptive coding-interview prep platform built around a Bayesian Knowledge Tracing (BKT) engine that continuously models each user's mastery per topic and recommends problems in their Zone of Proximal Development. Self-hosted Judge0 CE in Docker enables sandboxed execution across 6 languages at zero per-run cost, with JWKS-based JWT verification against Supabase Auth, Row-Level Security, and full GitHub Actions CI/CD.",
-      image:
-        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1080&q=80",
-      tech: ["Python", "FastAPI", "Supabase", "Judge0 CE", "React", "TypeScript", "Monaco Editor", "scikit-learn (BKT)", "GitHub Actions", "GCP"],
-      github: "https://github.com/rakeshlakshmanan/AdaptiveEliteCode",
-      accent: "amber",
-    },
-    {
-      title: "Modern Delay-Tolerant Email",
-      description:
-        "MSc dissertation (supervised by Stephen Farrell, co-author of RFC 9174) on filtering spam over Delay-Tolerant Networking on deep-space links. Built a five-node testbed emulating an Earth–Moon link with real mail infrastructure (Postfix, Dovecot, ION-DTN, BPMail) and benchmarked SpamAssassin, rspamd, and Vipul's Razor against 681 spam messages under a 1.3s one-way delay — measuring per-message verdicts, scan times, and bandwidth to recommend timeout-hardening for high-latency links.",
-      image:
-        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1080&q=80",
-      tech: ["Python", "Bash", "ION-DTN", "BPMail", "Postfix", "Dovecot", "SpamAssassin", "rspamd", "DNSBL", "Linux VMs", "tcpdump"],
-      status: "COMPLETED",
-      accent: "cyan",
-    },
-  ];
+// Grayscale placeholders keep the single-accent palette intact until real
+// screenshots are dropped in. Seeds describe each project.
+const img = (seed: string) =>
+  `https://picsum.photos/seed/${seed}/1200/800?grayscale`;
 
-  const getAccentClasses = (accent: string) => {
-    const colors = {
-      blue: {
-        border: "border-blue-500",
-        text: "text-blue-400",
-        hover: "hover:border-blue-500",
-        shadow: "hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]",
-        glow: "bg-gradient-to-r from-blue-500 to-transparent",
-      },
-      violet: {
-        border: "border-violet-500",
-        text: "text-violet-400",
-        hover: "hover:border-violet-500",
-        shadow: "hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]",
-        glow: "bg-gradient-to-r from-violet-500 to-transparent",
-      },
-      emerald: {
-        border: "border-emerald-500",
-        text: "text-emerald-400",
-        hover: "hover:border-emerald-500",
-        shadow: "hover:shadow-[0_0_30px_rgba(16,185,129,0.3)]",
-        glow: "bg-gradient-to-r from-emerald-500 to-transparent",
-      },
-      amber: {
-        border: "border-amber-500",
-        text: "text-amber-400",
-        hover: "hover:border-amber-500",
-        shadow: "hover:shadow-[0_0_30px_rgba(245,158,11,0.3)]",
-        glow: "bg-gradient-to-r from-amber-500 to-transparent",
-      },
-      cyan: {
-        border: "border-cyan-500",
-        text: "text-cyan-400",
-        hover: "hover:border-cyan-500",
-        shadow: "hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]",
-        glow: "bg-gradient-to-r from-cyan-500 to-transparent",
-      },
-      fuchsia: {
-        border: "border-fuchsia-500",
-        text: "text-fuchsia-400",
-        hover: "hover:border-fuchsia-500",
-        shadow: "hover:shadow-[0_0_30px_rgba(217,70,239,0.3)]",
-        glow: "bg-gradient-to-r from-fuchsia-500 to-transparent",
-      },
-      green: {
-        border: "border-green-500",
-        text: "text-green-400",
-        hover: "hover:border-green-500",
-        shadow: "hover:shadow-[0_0_30px_rgba(34,197,94,0.3)]",
-        glow: "bg-gradient-to-r from-green-500 to-transparent",
-      },
-    };
-    return colors[accent as keyof typeof colors];
-  };
+const featured: Project = {
+  title: "SmartEnoughCity",
+  blurb:
+    "Cloud-native urban transport intelligence for the Greater Dublin Area. Four microservices ingest 15+ real-time transport APIs into PostgreSQL/PostGIS and serve ML-driven mobility indicators through a React dashboard. Deployed to GKE via Helm and Terraform, backed by a ~600-test suite with a 75% coverage gate.",
+  image: img("smartenoughcity-transit"),
+  tech: [
+    "Java 17",
+    "Spring Boot",
+    "Python",
+    "FastAPI",
+    "scikit-learn",
+    "React",
+    "PostGIS",
+    "Kubernetes",
+    "Helm",
+    "Terraform",
+    "Istio",
+  ],
+  github: "https://github.com/rakeshlakshmanan/SmartEnoughCity",
+};
+
+const projects: Project[] = [
+  {
+    title: "Distributed Traffic Booking System",
+    blurb:
+      "A globally distributed road-booking platform enforcing per-segment capacity across Ireland, UK and France. Six services with a Saga orchestrator, Redis distributed locks against double-booking, and a self-healing reconciler on a multi-VM AWS topology.",
+    image: img("distributed-booking-roads"),
+    tech: ["Python", "FastAPI", "PostgreSQL", "Redis", "RabbitMQ", "AWS"],
+    github: "https://github.com/rakeshlakshmanan/distributed-road-booking",
+  },
+  {
+    title: "DevVault",
+    blurb:
+      "An AI-powered developer bookmark manager. Every save scrapes the page and calls Gemini 2.5 Flash on an event-driven pipeline that keeps AI latency off the request path. JWT and Google OAuth2 auth, a social layer, deployed end-to-end on GKE.",
+    image: img("devvault-bookmarks"),
+    tech: ["Java 17", "Spring Boot", "PostgreSQL", "Gemini", "React", "GKE"],
+    github: "https://github.com/rakeshlakshmanan/DevVault",
+    live: "https://devvault.qd.je",
+  },
+  {
+    title: "EliteCode",
+    blurb:
+      "Adaptive coding-interview prep built on a Bayesian Knowledge Tracing engine that models mastery per topic and recommends problems in each user's zone of proximal development. Self-hosted Judge0 CE sandboxes execution across six languages at zero per-run cost.",
+    image: img("elitecode-editor"),
+    tech: ["Python", "FastAPI", "Supabase", "Judge0", "React", "GCP"],
+    github: "https://github.com/rakeshlakshmanan/AdaptiveEliteCode",
+  },
+  {
+    title: "Modern Delay-Tolerant Email",
+    blurb:
+      "MSc dissertation on filtering spam over Delay-Tolerant Networking on deep-space links. A five-node testbed emulating an Earth-Moon link benchmarks SpamAssassin, rspamd and Vipul's Razor against 681 spam messages under a 1.3s delay.",
+    image: img("delay-tolerant-space"),
+    tech: ["Python", "ION-DTN", "BPMail", "Postfix", "SpamAssassin", "Linux"],
+    note: "MSc dissertation, Trinity College Dublin",
+  },
+];
+
+function TechRow({ tech, max }: { tech: string[]; max?: number }) {
+  const shown = max ? tech.slice(0, max) : tech;
+  const extra = max ? tech.length - shown.length : 0;
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {shown.map((t) => (
+        <span
+          key={t}
+          className="rounded-md border border-zinc-800 bg-zinc-900/60 px-2 py-0.5 font-mono text-xs text-zinc-400"
+        >
+          {t}
+        </span>
+      ))}
+      {extra > 0 && (
+        <span className="rounded-md px-2 py-0.5 font-mono text-xs text-zinc-500">
+          +{extra}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function Links({ github, live }: { github?: string; live?: string }) {
+  return (
+    <div className="flex items-center gap-4">
+      {github && (
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm text-zinc-300 transition-colors hover:text-emerald-400"
+        >
+          <Github className="h-4 w-4" />
+          Code
+        </a>
+      )}
+      {live && (
+        <a
+          href={live}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm text-zinc-300 transition-colors hover:text-emerald-400"
+        >
+          <ArrowUpRight className="h-4 w-4" />
+          Live demo
+        </a>
+      )}
+    </div>
+  );
+}
+
+export function Projects() {
+  const reduce = useReducedMotion();
+  const reveal = (delay = 0) =>
+    reduce
+      ? { initial: false as const }
+      : {
+          initial: { opacity: 0, y: 24 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.15 },
+          transition: { duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] as const },
+        };
 
   return (
-    <section className="relative py-32 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-fuchsia-500/10 rounded-full blur-[150px]" />
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
-        >
-          <span className="text-fuchsia-400 text-sm tracking-widest mb-4 block">PROJECTS.JSON</span>
-          <h2 className="text-5xl md:text-6xl mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
-              Featured Work
-            </span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            A collection of projects that push the boundaries of what's possible
-          </p>
-        </motion.div>
+    <section id="projects" className="border-t border-white/5">
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
+        <span className="accent-gradient mb-5 block h-1 w-12 rounded-full" />
+        <h2 className="text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl">
+          Selected work
+        </h2>
+        <p className="mt-3 max-w-2xl text-zinc-400">
+          Distributed systems, cloud-native platforms, and applied research.
+        </p>
 
-        <div className="grid md:grid-cols-1 gap-12">
-          {projects.map((project, index) => {
-            const accentClasses = getAccentClasses(project.accent);
-            return (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="group relative"
-              >
-                <div className={`absolute -inset-0.5 ${accentClasses.glow} opacity-0 group-hover:opacity-30 rounded-lg blur transition duration-300`} />
-                <div className={`relative bg-gray-900 border border-gray-800 rounded-lg overflow-hidden ${accentClasses.hover} ${accentClasses.shadow} transition-all duration-300`}>
-                  <div className="grid md:grid-cols-2 gap-0">
-                    <div className="relative h-64 md:h-full overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent z-10" />
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                    
-                    <div className="p-8 flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-center gap-2 mb-4">
-                          <div className={`w-2 h-2 ${accentClasses.border.replace('border-', 'bg-')} rounded-full animate-pulse`} />
-                          <span className={`${accentClasses.text} text-sm font-mono`}>
-                            STATUS: {project.status ?? "DEPLOYED"}
-                          </span>
-                        </div>
-                        
-                        <h3 className="text-3xl mb-4">
-                          <span className="text-white">{project.title}</span>
-                        </h3>
-                        
-                        <p className="text-gray-400 mb-6 leading-relaxed">
-                          {project.description}
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className={`px-3 py-1 text-xs border ${accentClasses.border} ${accentClasses.text} rounded-md bg-black/50`}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div className="flex gap-4">
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`flex items-center gap-2 px-6 py-3 border ${accentClasses.border} ${accentClasses.text} rounded-lg hover:bg-white/5 transition-all`}
-                          >
-                            <Github className="w-4 h-4" />
-                            View on GitHub
-                          </a>
-                        )}
-                        {project.live && (
-                          <a
-                            href={project.live}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`flex items-center gap-2 px-6 py-3 border ${accentClasses.border} ${accentClasses.text} rounded-lg hover:bg-white/5 transition-all`}
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            Live Demo
-                          </a>
-                        )}
-                      </div>
-                    </div>
+        {/* Featured project */}
+        <motion.article
+          {...reveal()}
+          className="group mt-14 grid grid-cols-1 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-500/10 lg:grid-cols-2"
+        >
+          <div className="relative aspect-video overflow-hidden lg:aspect-auto lg:h-full">
+            <img
+              src={featured.image}
+              alt={featured.title}
+              loading="lazy"
+              className="h-full w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent" />
+          </div>
+          <div className="flex flex-col justify-between gap-6 p-7 lg:p-9">
+            <div>
+              <h3 className="text-2xl font-semibold text-zinc-50">
+                {featured.title}
+              </h3>
+              <p className="mt-3 leading-relaxed text-zinc-400">
+                {featured.blurb}
+              </p>
+              <div className="mt-5">
+                <TechRow tech={featured.tech} />
+              </div>
+            </div>
+            <Links github={featured.github} live={featured.live} />
+          </div>
+        </motion.article>
+
+        {/* Remaining projects: 2x2 grid (4 cells) */}
+        <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+          {projects.map((project, i) => (
+            <motion.article
+              key={project.title}
+              {...reveal(i * 0.06)}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-cyan-500/40 hover:shadow-xl hover:shadow-cyan-500/10"
+            >
+              <div className="relative aspect-video overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover opacity-70 transition-all duration-500 group-hover:scale-105 group-hover:opacity-85"
+                />
+              </div>
+              <div className="flex flex-1 flex-col justify-between gap-5 p-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-zinc-100">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                    {project.blurb}
+                  </p>
+                  <div className="mt-4">
+                    <TechRow tech={project.tech} max={6} />
                   </div>
                 </div>
-              </motion.div>
-            );
-          })}
+                {project.github || project.live ? (
+                  <Links github={project.github} live={project.live} />
+                ) : (
+                  <span className="font-mono text-xs text-zinc-500">
+                    {project.note}
+                  </span>
+                )}
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

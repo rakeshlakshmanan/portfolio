@@ -1,95 +1,91 @@
-import { motion } from "motion/react";
-import { Server, Shield, Cloud } from "lucide-react";
+"use client";
+import { motion, useReducedMotion } from "motion/react";
+import { Network, Layers, Cloud } from "lucide-react";
 import { Terminal } from "./Terminal";
 
+const capabilities = [
+  {
+    icon: Network,
+    title: "Distributed systems",
+    detail: "HA/DR topologies, replication, and failover automation at 99.95% uptime.",
+  },
+  {
+    icon: Layers,
+    title: "Platform engineering",
+    detail: "Reusable Java frameworks adopted across 20+ product teams.",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud and reliability",
+    detail: "Containerised workloads on AWS and GKE with CI/CD and observability.",
+  },
+];
+
 export function About() {
-  const features = [
-    {
-      icon: Server,
-      title: "Distributed Systems",
-      description: "Designed 4-node HA/DR topologies achieving 99.95% uptime in production environments",
-    },
-    {
-      icon: Shield,
-      title: "Fault Tolerance",
-      description: "Built failover automation and file replication systems reducing recovery time by 35%",
-    },
-    {
-      icon: Cloud,
-      title: "Platform Engineering",
-      description: "Architected internal Java platform frameworks used across multiple product teams",
-    },
-  ];
+  const reduce = useReducedMotion();
+  const reveal = reduce
+    ? { initial: false as const }
+    : {
+        initial: { opacity: 0, y: 24 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+      };
 
   return (
-    <section className="relative py-32 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-fuchsia-950/20 to-transparent" />
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
-        >
-          <span className="text-cyan-400 text-sm tracking-widest mb-4 block">ABOUT.EXE</span>
-          <h2 className="text-5xl md:text-6xl mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">
-              Who I Am
-            </span>
+    <section id="about" className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16">
+        {/* Left: narrative */}
+        <motion.div {...reveal}>
+          <span className="accent-gradient mb-5 block h-1 w-12 rounded-full" />
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl">
+            Who I am
           </h2>
+          <div className="mt-6 space-y-4 text-zinc-400">
+            <p>
+              I spent roughly three years at Zoho Corporation building the
+              infrastructure that keeps software running when nobody is watching.
+              I designed a four-node HA/DR topology that held 99.95% uptime,
+              hardened failover and file-replication paths, and scaled an internal
+              Java platform framework to more than 20 product teams.
+            </p>
+            <p>
+              I recently finished an MSc in Computer Science at Trinity College
+              Dublin with a Distinction, specialising in Future Networked Systems.
+              I work comfortably across Java and Spring Boot, Python and FastAPI,
+              and React and TypeScript.
+            </p>
+          </div>
+
+          <ul className="mt-8 divide-y divide-zinc-800 border-t border-zinc-800">
+            {capabilities.map((cap) => (
+              <li key={cap.title} className="flex items-start gap-4 py-4">
+                <span className="mt-0.5 rounded-lg border border-zinc-800 bg-zinc-900 p-2 text-emerald-400">
+                  <cap.icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="font-medium text-zinc-100">{cap.title}</h3>
+                  <p className="text-sm text-zinc-500">{cap.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-stretch mb-20">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="h-full min-h-[420px]"
-          >
-            <Terminal />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="absolute inset-0 bg-cyan-500/10 blur-3xl" />
-            <img
-              src={`${import.meta.env.BASE_URL}rakesh_profile_pic.PNG`}
-              alt="Rakesh Lakshmanan"
-              className="relative rounded-lg border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.3)] w-full h-full object-cover object-top"
-            />
-          </motion.div>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="group relative"
-            >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-fuchsia-500 rounded-lg opacity-0 group-hover:opacity-100 transition duration-300 blur" />
-              <div className="relative bg-gray-900 border border-gray-800 rounded-lg p-6 h-full">
-                <div className="w-12 h-12 bg-gradient-to-r from-cyan-500/20 to-fuchsia-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-6 h-6 text-cyan-400" />
-                </div>
-                <h3 className="text-xl mb-2 text-white">{feature.title}</h3>
-                <p className="text-gray-400">{feature.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Right: real interactive terminal */}
+        <motion.div
+          {...(reduce
+            ? { initial: false as const }
+            : {
+                initial: { opacity: 0, y: 24 },
+                whileInView: { opacity: 1, y: 0 },
+                viewport: { once: true, amount: 0.2 },
+                transition: { duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] as const },
+              })}
+          className="min-h-[420px] lg:h-full"
+        >
+          <Terminal />
+        </motion.div>
       </div>
     </section>
   );

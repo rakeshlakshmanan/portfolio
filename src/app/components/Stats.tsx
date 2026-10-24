@@ -1,81 +1,84 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "motion/react";
+import { useInView, useReducedMotion } from "motion/react";
 
 type Stat = {
   value: number;
   decimals?: number;
   suffix: string;
-  prefix?: string;
   label: string;
-  color: string;
 };
 
+// All figures are real, sourced from the CV.
 const stats: Stat[] = [
-  { value: 99.95, decimals: 2, suffix: "%", label: "System Uptime", color: "text-cyan-400" },
-  { value: 500, suffix: "+", label: "Production Tickets Resolved", color: "text-fuchsia-400" },
-  { value: 60, suffix: "%", label: "Reduction in Manual Testing", color: "text-green-400" },
-  { value: 35, suffix: "%", label: "Faster Recovery Time", color: "text-yellow-400" },
-  { value: 100, suffix: "+", label: "Nodes in Production", color: "text-cyan-400" },
-  { value: 3, suffix: "+ yrs", label: "Production Experience", color: "text-fuchsia-400" },
+  { value: 99.95, decimals: 2, suffix: "%", label: "Production uptime" },
+  { value: 100, suffix: "+", label: "Nodes in production" },
+  { value: 20, suffix: "+", label: "Teams on the platform" },
+  { value: 500, suffix: "+", label: "Tickets resolved" },
+  { value: 60, suffix: "%", label: "Less manual failover" },
+  { value: 3, suffix: " yrs", label: "Industry experience" },
 ];
 
-function Counter({ stat, inView }: { stat: Stat; inView: boolean }) {
-  const [count, setCount] = useState(0);
+function Counter({ stat, run }: { stat: Stat; run: boolean }) {
+  const reduce = useReducedMotion();
+  const [count, setCount] = useState(reduce ? stat.value : 0);
   const started = useRef(false);
 
   useEffect(() => {
-    if (!inView || started.current) return;
+    if (reduce) {
+      setCount(stat.value);
+      return;
+    }
+    if (!run || started.current) return;
     started.current = true;
 
-    const duration = 1800;
-    const steps = 60;
+    const duration = 1400;
+    const steps = 48;
     const interval = duration / steps;
     let step = 0;
-
     const timer = setInterval(() => {
       step++;
       const progress = step / steps;
-      // ease out
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(parseFloat((eased * stat.value).toFixed(stat.decimals ?? 0)));
       if (step >= steps) clearInterval(timer);
     }, interval);
 
     return () => clearInterval(timer);
-  }, [inView, stat.value, stat.decimals]);
+  }, [run, reduce, stat.value, stat.decimals]);
 
   const display = stat.decimals ? count.toFixed(stat.decimals) : Math.floor(count);
 
   return (
-    <span className={`text-4xl md:text-5xl font-black font-mono ${stat.color}`}>
-      {stat.prefix}{display}{stat.suffix}
+    <span className="text-gradient font-mono text-3xl font-semibold md:text-4xl">
+      {display}
+      {stat.suffix}
     </span>
   );
 }
 
 export function Stats() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="relative py-20 bg-gradient-to-b from-black/40 to-black/40 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0a0a0a_1px,transparent_1px),linear-gradient(to_bottom,#0a0a0a_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-30" />
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center"
-            >
-              <Counter stat={stat} inView={inView} />
-              <p className="text-gray-500 text-xs font-mono mt-2 leading-tight">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
+    <section
+      ref={ref}
+      className="border-y border-white/5"
+      aria-label="Key metrics"
+    >
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-3 lg:grid-cols-6 lg:gap-y-0">
+        {stats.map((stat, i) => (
+          <div
+            key={stat.label}
+            className={`flex flex-col gap-1 px-2 lg:px-6 ${
+              i % 3 !== 0 ? "border-l border-zinc-900" : ""
+            } lg:border-l lg:first:border-l-0 ${i % 3 === 0 ? "border-l-0" : ""}`}
+          >
+            <Counter stat={stat} run={inView} />
+            <span className="text-xs leading-snug text-zinc-500">{stat.label}</span>
+          </div>
+        ))}
       </div>
     </section>
   );
