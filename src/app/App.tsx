@@ -4,6 +4,7 @@ import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { Stats } from "./components/Stats";
 import { About } from "./components/About";
+import { Usp } from "./components/Usp";
 import { Experience } from "./components/Experience";
 import { Skills } from "./components/Skills";
 import { Projects } from "./components/Projects";
@@ -30,6 +31,7 @@ export default function App() {
         <Hero />
         <Stats />
         <About />
+        <Usp />
         <Experience />
         <Skills />
         <Projects />
