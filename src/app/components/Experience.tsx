@@ -63,6 +63,7 @@ const education = [
 
 const achievements = [
   "Awarded Mickey Emerging Programmer (Q4 FY23) for building reusable components in Zoho's Java data-access framework.",
+  "Selected to mentor two summer interns within two years of joining Zoho, a responsibility usually given to engineers with 3+ years of experience.",
 ];
 
 export function Experience() {
